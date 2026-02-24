@@ -27,3 +27,7 @@ def test_baraja_no_tiene_duplicados():
     # Un set NO permite elementos duplicados
     # Si hubiera cartas repetidas, el tamaño disminuiría
     assert len(baraja) == len(set(baraja))
+
+def test_prueba():
+    assert True
+
