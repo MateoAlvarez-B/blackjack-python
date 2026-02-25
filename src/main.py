@@ -27,6 +27,17 @@ def crear_baraja():
     # Devolvemos la baraja ya creada y mezclada
     return baraja
 
+def repartir_carta(baraja):
+    """
+    Saca la primera carta de la baraja y devuelve:
+    - la carta extraída
+    - la baraja restante
+    """
+    # pop(0) elimina y devuelve el elemento que está en la posición 0 de la lista, 
+    # es decir, el primer elemento.
+    carta = baraja.pop(0)
+    return carta, baraja
+
 
 # Este bloque solo se ejecuta si el archivo se ejecuta directamente
 # (no si se importa como módulo en otro archivo)
@@ -42,3 +53,4 @@ if __name__ == "__main__":
     # Mostramos solo las primeras 5 cartas
     # baraja[:5] significa "desde la posición 0 hasta la 4"
     print(baraja[:5])
+
