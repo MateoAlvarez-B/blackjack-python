@@ -38,6 +38,36 @@ def repartir_carta(baraja):
     carta = baraja.pop(0)
     return carta, baraja
 
+def calcular_valor_mano(mano):
+    """
+    Calcula el valor total de una mano de Blackjack.
+    El As vale 11, pero si el total supera 21, pasa a valer 1.
+    """
+    valor = 0      # Acumula el valor total de la mano
+    ases = 0       # Cuenta cuántos Ases hay (porque pueden valer 11 o 1)
+
+    for carta in mano:
+        numero = carta[:-1]  # Extrae el valor de la carta (quita el palo)
+
+        # Figuras valen 10
+        if numero in ["J", "Q", "K"]:
+            valor += 10
+
+        # El As vale inicialmente 11
+        elif numero == "A":
+            valor += 11
+            ases += 1        # Contamos el As para poder ajustarlo después
+
+        # Cartas numéricas: convertir a entero
+        else:
+            valor += int(numero)
+
+    # Ajustar el valor de los Ases si nos pasamos de 21
+    while valor > 21 and ases > 0:
+        valor -= 10   # Cambiar un As de 11 → 1 (restar 10 equivale a eso)
+        ases -= 1     # Ya hemos ajustado un As
+
+    return valor      # Devolver el valor final de la mano
 
 # Este bloque solo se ejecuta si el archivo se ejecuta directamente
 # (no si se importa como módulo en otro archivo)
@@ -53,4 +83,5 @@ if __name__ == "__main__":
     # Mostramos solo las primeras 5 cartas
     # baraja[:5] significa "desde la posición 0 hasta la 4"
     print(baraja[:5])
+
 
