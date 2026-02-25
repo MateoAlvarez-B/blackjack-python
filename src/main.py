@@ -69,6 +69,27 @@ def calcular_valor_mano(mano):
 
     return valor      # Devolver el valor final de la mano
 
+def repartir_manos_iniciales(baraja):
+    """
+    Reparte dos cartas al jugador y dos al dealer.
+    Devuelve:
+    - mano_jugador
+    - mano_dealer
+    - baraja_restante
+    """
+    mano_jugador = []
+    mano_dealer = []
+
+    for _ in range(2):
+        carta, baraja = repartir_carta(baraja)
+        mano_jugador.append(carta)
+
+        carta, baraja = repartir_carta(baraja)
+        mano_dealer.append(carta)
+
+    return mano_jugador, mano_dealer, baraja
+
+
 # Este bloque solo se ejecuta si el archivo se ejecuta directamente
 # (no si se importa como módulo en otro archivo)
 if __name__ == "__main__":
@@ -83,5 +104,6 @@ if __name__ == "__main__":
     # Mostramos solo las primeras 5 cartas
     # baraja[:5] significa "desde la posición 0 hasta la 4"
     print(baraja[:5])
+
 
 
