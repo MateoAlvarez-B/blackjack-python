@@ -67,6 +67,16 @@ def test_valor_blackjack():
     # Blackjack natural: As + figura = 21
     mano = ["A♠", "K♦"]
     assert calcular_valor_mano(mano) == 21
+from src.main import repartir_manos_iniciales
+
+def test_repartir_manos_iniciales():
+    baraja = crear_baraja()
+    mano_jugador, mano_dealer, baraja_restante = repartir_manos_iniciales(baraja)
+
+    assert len(mano_jugador) == 2
+    assert len(mano_dealer) == 2
+    assert len(baraja_restante) == 52 - 4
+    assert mano_jugador[0] != mano_dealer[0]  # No deben ser la misma carta
 
 def test_prueba():
     assert True
