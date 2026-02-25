@@ -41,6 +41,33 @@ def test_repartir_carta_quita_la_carta_de_la_baraja():
     assert carta1 != carta2
     assert len(baraja) == 50
 
+from src.main import calcular_valor_mano
+
+def test_valor_sin_ases():
+    # Mano sin Ases: solo se suman valores directos
+    mano = ["10♣", "9♦"]
+    assert calcular_valor_mano(mano) == 19
+
+def test_valor_con_un_as_sin_pasarse():
+    # Un As que puede valer 11 sin superar 21
+    mano = ["A♠", "8♦"]
+    assert calcular_valor_mano(mano) == 19
+
+def test_valor_con_un_as_pasandose():
+    # Un As que inicialmente vale 11, pero debe ajustarse a 1
+    mano = ["A♠", "9♦", "5♥"]
+    assert calcular_valor_mano(mano) == 15  # 11 + 9 + 5 = 25 → ajustar As → 15
+
+def test_valor_con_dos_ases():
+    # Dos Ases: uno vale 11 y el otro se ajusta a 1
+    mano = ["A♠", "A♥"]
+    assert calcular_valor_mano(mano) == 12  # 11 + 1
+
+def test_valor_blackjack():
+    # Blackjack natural: As + figura = 21
+    mano = ["A♠", "K♦"]
+    assert calcular_valor_mano(mano) == 21
+
 def test_prueba():
     assert True
 
