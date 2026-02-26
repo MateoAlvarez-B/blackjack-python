@@ -10,21 +10,10 @@ PALOS = ["♠", "♥", "♦", "♣"]
 VALORES = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
 
 def crear_baraja():
-    """
-    Crea una baraja estándar de 52 cartas.
-    Cada carta es una tupla (valor, palo).
-    """
+    palos = ["♠", "♥", "♦", "♣"]
+    numeros = ["A"] + [str(i) for i in range(2, 11)] + ["J", "Q", "K"]
 
-    # Creamos una lista de cartas usando comprensión de listas
-    # Recorre cada palo y para cada palo recorre todos los valores
-    # Genera combinaciones como: ("A", "♠"), ("2", "♠"), etc.
-    baraja = [(valor, palo) for palo in PALOS for valor in VALORES]
-
-    # Mezclamos la lista de cartas de forma aleatoria
-    # shuffle modifica la lista original (no devuelve una nueva)
-    random.shuffle(baraja)
-
-    # Devolvemos la baraja ya creada y mezclada
+    baraja = [numero + palo for palo in palos for numero in numeros]
     return baraja
 
 def repartir_carta(baraja):
@@ -201,6 +190,7 @@ if __name__ == "__main__":
     # Mostramos solo las primeras 5 cartas
     # baraja[:5] significa "desde la posición 0 hasta la 4"
     print(baraja[:5])
+
 
 
 
