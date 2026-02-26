@@ -114,6 +114,39 @@ def turno_jugador(mano_jugador, baraja):
 
     return mano_jugador, baraja
 
+def turno_dealer(mano_dealer, baraja):
+    print("\nTurno del dealer...")
+
+    while calcular_valor_mano(mano_dealer) < 17:
+        carta, baraja = repartir_carta(baraja)
+        mano_dealer.append(carta)
+        print(f"El dealer pide carta: {carta}")
+
+    mostrar_mano("Dealer", mano_dealer)
+
+    if calcular_valor_mano(mano_dealer) > 21:
+        print("El dealer se ha pasado de 21.")
+    
+    return mano_dealer, baraja
+
+def determinar_ganador(mano_jugador, mano_dealer):
+    valor_jugador = calcular_valor_mano(mano_jugador)
+    valor_dealer = calcular_valor_mano(mano_dealer)
+
+    if valor_jugador > 21:
+        return "Dealer"
+    if valor_dealer > 21:
+        return "Jugador"
+
+    if valor_jugador > valor_dealer:
+        return "Jugador"
+    elif valor_dealer > valor_jugador:
+        return "Dealer"
+    else:
+        return "Empate"
+
+
+
 
 
 
@@ -131,6 +164,7 @@ if __name__ == "__main__":
     # Mostramos solo las primeras 5 cartas
     # baraja[:5] significa "desde la posición 0 hasta la 4"
     print(baraja[:5])
+
 
 
 
