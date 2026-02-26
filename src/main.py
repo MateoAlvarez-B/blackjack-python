@@ -145,10 +145,47 @@ def determinar_ganador(mano_jugador, mano_dealer):
     else:
         return "Empate"
 
+def jugar_partida():
+    print("=== Bienvenido al Blackjack ===")
 
+    # Crear baraja
+    baraja = crear_baraja()
 
+    # Repartir manos iniciales
+    mano_jugador, mano_dealer, baraja = repartir_manos_iniciales(baraja)
 
+    print("\nTus cartas iniciales:")
+    mostrar_mano("Jugador", mano_jugador)
 
+    print("\nCarta visible del dealer:")
+    print(f"Dealer: {mano_dealer[0]}, ?")
+
+    # Turno del jugador
+    mano_jugador, baraja = turno_jugador(mano_jugador, baraja)
+
+    # Si el jugador se pasa, termina la partida
+    if calcular_valor_mano(mano_jugador) > 21:
+        print("\nEl dealer gana.")
+        return
+
+    # Turno del dealer
+    mano_dealer, baraja = turno_dealer(mano_dealer, baraja)
+
+    # Determinar ganador
+    ganador = determinar_ganador(mano_jugador, mano_dealer)
+
+    print("\n=== Resultado final ===")
+    mostrar_mano("Jugador", mano_jugador)
+    mostrar_mano("Dealer", mano_dealer)
+
+    if ganador == "Jugador":
+        print("\n¡Has ganado!")
+    elif ganador == "Dealer":
+        print("\nEl dealer gana.")
+    else:
+        print("\nEmpate.")
+if __name__ == "__main__":
+    jugar_partida()
 
 # Este bloque solo se ejecuta si el archivo se ejecuta directamente
 # (no si se importa como módulo en otro archivo)
@@ -164,6 +201,7 @@ if __name__ == "__main__":
     # Mostramos solo las primeras 5 cartas
     # baraja[:5] significa "desde la posición 0 hasta la 4"
     print(baraja[:5])
+
 
 
 
