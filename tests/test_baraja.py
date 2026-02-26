@@ -78,6 +78,34 @@ def test_repartir_manos_iniciales():
     assert len(baraja_restante) == 52 - 4
     assert mano_jugador[0] != mano_dealer[0]  # No deben ser la misma carta
 
+from src.main import determinar_ganador
+
+def test_gana_jugador_por_puntuacion():
+    mano_jugador = ["10♣", "9♦"]  # 19
+    mano_dealer = ["8♠", "8♦"]    # 16
+    assert determinar_ganador(mano_jugador, mano_dealer) == "Jugador"
+
+def test_gana_dealer_por_puntuacion():
+    mano_jugador = ["7♣", "8♦"]   # 15
+    mano_dealer = ["10♠", "9♦"]   # 19
+    assert determinar_ganador(mano_jugador, mano_dealer) == "Dealer"
+
+def test_empate():
+    mano_jugador = ["10♣", "9♦"]  # 19
+    mano_dealer = ["K♠", "9♥"]    # 19
+    assert determinar_ganador(mano_jugador, mano_dealer) == "Empate"
+
+def test_jugador_se_pasa():
+    mano_jugador = ["K♣", "9♦", "5♥"]  # 24
+    mano_dealer = ["2♠", "3♦"]         # 5
+    assert determinar_ganador(mano_jugador, mano_dealer) == "Dealer"
+
+def test_dealer_se_pasa():
+    mano_jugador = ["10♣", "9♦"]       # 19
+    mano_dealer = ["K♠", "9♥", "5♦"]   # 24
+    assert determinar_ganador(mano_jugador, mano_dealer) == "Jugador"
+
+
 def test_prueba():
     assert True
 
