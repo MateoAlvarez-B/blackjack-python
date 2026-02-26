@@ -143,7 +143,8 @@ def jugar_partida():
         print("\nEl dealer gana.")
     else:
         print("\nEmpate.")
-
+if __name__ == "__main__":
+    jugar_partida()
 
 def test_prueba():
     assert True
