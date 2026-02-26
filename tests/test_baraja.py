@@ -104,6 +104,45 @@ def test_dealer_se_pasa():
     mano_jugador = ["10♣", "9♦"]       # 19
     mano_dealer = ["K♠", "9♥", "5♦"]   # 24
     assert determinar_ganador(mano_jugador, mano_dealer) == "Jugador"
+def jugar_partida():
+    print("=== Bienvenido al Blackjack ===")
+
+    # Crear baraja
+    baraja = crear_baraja()
+
+    # Repartir manos iniciales
+    mano_jugador, mano_dealer, baraja = repartir_manos_iniciales(baraja)
+
+    print("\nTus cartas iniciales:")
+    mostrar_mano("Jugador", mano_jugador)
+
+    print("\nCarta visible del dealer:")
+    print(f"Dealer: {mano_dealer[0]}, ?")
+
+    # Turno del jugador
+    mano_jugador, baraja = turno_jugador(mano_jugador, baraja)
+
+    # Si el jugador se pasa, termina la partida
+    if calcular_valor_mano(mano_jugador) > 21:
+        print("\nEl dealer gana.")
+        return
+
+    # Turno del dealer
+    mano_dealer, baraja = turno_dealer(mano_dealer, baraja)
+
+    # Determinar ganador
+    ganador = determinar_ganador(mano_jugador, mano_dealer)
+
+    print("\n=== Resultado final ===")
+    mostrar_mano("Jugador", mano_jugador)
+    mostrar_mano("Dealer", mano_dealer)
+
+    if ganador == "Jugador":
+        print("\n¡Has ganado!")
+    elif ganador == "Dealer":
+        print("\nEl dealer gana.")
+    else:
+        print("\nEmpate.")
 
 
 def test_prueba():
