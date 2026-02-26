@@ -89,6 +89,33 @@ def repartir_manos_iniciales(baraja):
 
     return mano_jugador, mano_dealer, baraja
 
+def mostrar_mano(nombre, mano):
+    valor = calcular_valor_mano(mano)
+    cartas = ", ".join(mano)
+    print(f"{nombre}: {cartas}  (valor: {valor})")
+
+def turno_jugador(mano_jugador, baraja):
+    while True:
+        mostrar_mano("Jugador", mano_jugador)
+
+        decision = input("¿Quieres pedir carta (p) o plantarte (s)? ").lower()
+
+        if decision == "s":
+            break
+
+        if decision == "p":
+            carta, baraja = repartir_carta(baraja)
+            mano_jugador.append(carta)
+
+            if calcular_valor_mano(mano_jugador) > 21:
+                mostrar_mano("Jugador", mano_jugador)
+                print("Te has pasado de 21. Pierdes.")
+                break
+
+    return mano_jugador, baraja
+
+
+
 
 # Este bloque solo se ejecuta si el archivo se ejecuta directamente
 # (no si se importa como módulo en otro archivo)
@@ -104,6 +131,7 @@ if __name__ == "__main__":
     # Mostramos solo las primeras 5 cartas
     # baraja[:5] significa "desde la posición 0 hasta la 4"
     print(baraja[:5])
+
 
 
 
